@@ -9,11 +9,18 @@ import (
 	"github.com/panjf2000/ants/v2"
 	"log"
 	"os"
+	"strings"
 	"sync"
 )
 
+var(
+	dirs []string
+	target string
+)
+
+
 func main(){
-	var dirs []string
+
 
 	options := options2.ParseOptions()
 	runner := runner.NewRunner(options)
@@ -37,7 +44,11 @@ func main(){
 		wg.Done()
 	})
 	for _,pathname := range dirs{
-		target := runner.Options.Url + pathname
+		if strings.Contains(pathname, "/") {
+			target = runner.Options.Url + pathname
+		}else {
+			target = runner.Options.Url + "/" + pathname
+		}
 		wg.Add(1)
 		_ = p.Invoke(target)
 	}
