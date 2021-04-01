@@ -16,11 +16,11 @@ func RespStatus(target string)int{
 
 
 func ScanBacnkup(target string) bool{
+
 	if strings.Contains(target, "http") {
 		target = target
 	}else {
 		target = "http://" + target
-		target = target
 	}
 
 	CheckCode := RespStatus(target)

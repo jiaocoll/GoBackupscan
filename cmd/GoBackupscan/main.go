@@ -35,7 +35,9 @@ func main(){
 		dirs = append(dirs, tmp)
 
 	}
-
+	if string(runner.Options.Url[len(runner.Options.Url)-1]) == "/"{
+		runner.Options.Url = runner.Options.Url[:len(runner.Options.Url)-1]
+	}
 	var wg sync.WaitGroup
 	p, _ := ants.NewPoolWithFunc(runner.Options.Rate, func(i interface{}) {
 		if(scan.ScanBacnkup(i.(string))){
