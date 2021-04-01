@@ -41,7 +41,7 @@ func main(){
 	var wg sync.WaitGroup
 	p, _ := ants.NewPoolWithFunc(runner.Options.Rate, func(i interface{}) {
 		if(scan.ScanBacnkup(i.(string))){
-			fmt.Println(runner.Options.Url + i.(string))
+			fmt.Println(i.(string))
 		}
 		wg.Done()
 	})
