@@ -6,6 +6,7 @@ import (
 	"GoBackupscan/pkg/scan"
 	"bufio"
 	"fmt"
+	"github.com/fatih/color"
 	"github.com/panjf2000/ants/v2"
 	"log"
 	"os"
@@ -41,7 +42,7 @@ func main(){
 	var wg sync.WaitGroup
 	p, _ := ants.NewPoolWithFunc(runner.Options.Rate, func(i interface{}) {
 		if(scan.ScanBacnkup(i.(string))){
-			fmt.Println(i.(string))
+			fmt.Fprintln(color.Output,color.HiCyanString(i.(string)))
 		}
 		wg.Done()
 	})
